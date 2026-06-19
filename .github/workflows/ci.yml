@@ -31,7 +31,7 @@ jobs:
       run_heavy_suites: ${{ steps.scope.outputs.run_heavy_suites }}
       manifest_path: ${{ steps.scope.outputs.manifest_path }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -83,7 +83,7 @@ jobs:
     if: needs.preflight.outputs.run_heavy_suites == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
