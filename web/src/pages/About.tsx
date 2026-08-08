@@ -2,39 +2,34 @@ import { Link } from 'react-router-dom'
 import SiteHeader from '../components/SiteHeader'
 import { LogoMark } from '../brand/Logo'
 import { CONTACT_EMAILS } from '../guide/contacts'
+import { useStrings } from '../i18n/strings'
 import './About.css'
 
-const AUDIENCE = [
-  "Master's students — learning to structure a research project",
-  'PhD students — conducting and publishing original research',
-  'Supervisors & teachers — guiding and reviewing student work (encadrement)',
-  'Scientific researchers — standardizing methodology across projects',
-  'AI assistants & agents — supporting researchers throughout the workflow',
-]
-
 export default function About() {
+  const t = useStrings()
+
   return (
     <div className="about">
       <SiteHeader />
 
       <main className="about__main">
         <header className="about__intro">
-          <p className="about__eyebrow">About</p>
-          <h1 className="about__title">About Research Methodology Hub</h1>
+          <p className="about__eyebrow">{t.about.eyebrow}</p>
+          <h1 className="about__title">{t.about.title}</h1>
         </header>
 
         {/* ---- Quoi / What ---- */}
         <section className="about__section">
           <h2 className="about__h2">
             <span className="about__h2-rule" />
-            What it is
+            {t.about.whatTitle}
           </h2>
           <p className="about__body">
-            Research Methodology Hub is an open-source toolbox of standardized guidelines, frameworks, and templates for
-            conducting rigorous, reproducible research in Computer Science, Artificial Intelligence, and Data Science.
-            At its core are step-by-step <Link className="about__inline-link" to="/methodologies">methodology guides</Link> that
-            walk through the full research lifecycle — from problem formulation and literature review to methodology,
-            experimentation, analysis, and dissemination — across multiple disciplines.
+            {t.about.whatBefore}
+            <Link className="about__inline-link" to="/methodologies">
+              {t.about.whatLink}
+            </Link>
+            {t.about.whatAfter}
           </p>
         </section>
 
@@ -42,17 +37,16 @@ export default function About() {
         <section className="about__section">
           <h2 className="about__h2">
             <span className="about__h2-rule" />
-            Why it exists
+            {t.about.whyTitle}
           </h2>
           <p className="about__body">
-            In modern Computer Science and AI research, reproducibility is a major challenge. Methods are often
-            under-documented, baselines inconsistent, and results hard to reproduce. This hub exists to improve
-            <strong> reproducibility, rigor, and structure</strong> — giving researchers a shared, dependable process
-            for data management, model evaluation, and software engineering in science.
+            {t.about.whyBefore}
+            <strong>{t.about.whyStrong}</strong>
+            {t.about.whyAfter}
           </p>
-          <p className="about__body">It is built for:</p>
+          <p className="about__body">{t.about.builtFor}</p>
           <ul className="about__list">
-            {AUDIENCE.map((a) => (
+            {t.about.audience.map((a) => (
               <li key={a}>{a}</li>
             ))}
           </ul>
@@ -62,18 +56,19 @@ export default function About() {
         <section className="about__section">
           <h2 className="about__h2">
             <span className="about__h2-rule" />
-            Who is behind it
+            {t.about.whoTitle}
           </h2>
           <p className="about__body">
-            This project was <strong>initialised by Mohamed El Hajji</strong> and is built with the community, hosted by
-            the{' '}
+            {t.about.whoBefore}
+            <strong>{t.about.whoStrong}</strong>
+            {t.about.whoMid}
             <a className="about__inline-link" href="https://github.com/Research-Methodology-Hub" target="_blank" rel="noreferrer">
               Research-Methodology-Hub
-            </a>{' '}
-            organization. Contributions — frameworks, templates, and best-practice guides — are welcome.
+            </a>
+            {t.about.whoAfter}
           </p>
           <p className="about__contact">
-            Get in touch:{' '}
+            {t.about.getInTouch}{' '}
             {CONTACT_EMAILS.map((email, i) => (
               <span key={email}>
                 {i > 0 && ' · '}
@@ -89,10 +84,10 @@ export default function About() {
       <footer className="about__footer">
         <div className="about__footer-mark">
           <LogoMark size={20} />
-          <span>Research Methodology Hub</span>
+          <span>{t.footer.brand}</span>
         </div>
-        <span className="about__footer-credit">Initialised by Mohamed El Hajji</span>
-        <span className="about__footer-note">Computer Science · AI · Data Science</span>
+        <span className="about__footer-credit">{t.footer.credit}</span>
+        <span className="about__footer-note">{t.about.footerNote}</span>
       </footer>
     </div>
   )
