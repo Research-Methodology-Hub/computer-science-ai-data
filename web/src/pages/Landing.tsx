@@ -2,9 +2,12 @@ import { Link } from 'react-router-dom'
 import SiteHeader from '../components/SiteHeader'
 import { LogoMark } from '../brand/Logo'
 import { meridien } from '../brand/palette'
+import { useStrings } from '../i18n/strings'
 import './Landing.css'
 
 export default function Landing() {
+  const t = useStrings()
+
   return (
     <div className="landing">
       {/* faint construction grid, à la Méridien */}
@@ -20,20 +23,19 @@ export default function Landing() {
       <SiteHeader />
 
       <main className="landing__hero">
-        <p className="landing__eyebrow">Est. 2026 · Open research methodology</p>
+        <p className="landing__eyebrow">{t.landing.eyebrow}</p>
         <h1 className="landing__title">
-          A centralized hub for research <span className="landing__title-accent">methodology</span>.
+          {t.landing.titleBefore}
+          <span className="landing__title-accent">{t.landing.titleAccent}</span>
+          {t.landing.titleAfter}
         </h1>
-        <p className="landing__lede">
-          Sharing research methodologies, frameworks, and tools across diverse academic and scientific disciplines —
-          built for reproducibility, rigor, and structure.
-        </p>
+        <p className="landing__lede">{t.landing.lede}</p>
         <div className="landing__cta">
           <Link to="/methodologies" className="landing__btn landing__btn--primary">
-            Explore the guides →
+            {t.landing.exploreCta}
           </Link>
           <a href="#" className="landing__btn landing__btn--ghost">
-            Browse the catalogue
+            {t.landing.browseCta}
           </a>
         </div>
       </main>
@@ -41,10 +43,10 @@ export default function Landing() {
       <footer className="landing__footer">
         <div className="landing__footer-mark">
           <LogoMark size={20} />
-          <span>Research Methodology Hub</span>
+          <span>{t.footer.brand}</span>
         </div>
-        <span className="landing__footer-credit">Initialised by Mohamed El Hajji</span>
-        <span className="landing__footer-note">Methods · Frameworks · Tools</span>
+        <span className="landing__footer-credit">{t.footer.credit}</span>
+        <span className="landing__footer-note">{t.landing.footerNote}</span>
       </footer>
     </div>
   )

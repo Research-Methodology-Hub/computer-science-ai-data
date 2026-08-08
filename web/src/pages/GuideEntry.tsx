@@ -3,11 +3,15 @@ import SiteHeader from '../components/SiteHeader'
 import { LogoMark } from '../brand/Logo'
 import { CONTACT_EMAILS } from '../guide/contacts'
 import { getMethodology } from '../guide/methodologies'
+import { useLocale } from '../i18n/locale'
+import { useStrings } from '../i18n/strings'
 import './GuideEntry.css'
 
 export default function GuideEntry() {
   const { id } = useParams()
-  const methodology = getMethodology(id)
+  const { locale } = useLocale()
+  const t = useStrings()
+  const methodology = getMethodology(id, locale)
 
   // Unknown slug → back to the catalogue.
   if (!methodology) {
@@ -26,7 +30,7 @@ export default function GuideEntry() {
         <header className="guide__intro">
           <p className="guide__eyebrow">
             <Link to="/methodologies" className="guide__breadcrumb">
-              Methodologies
+              {t.guide.breadcrumb}
             </Link>{' '}
             / {domain}
           </p>
@@ -38,14 +42,15 @@ export default function GuideEntry() {
           ))}
           {!isComingSoon && (
             <p className="guide__lead">
-              We recommend starting with the <a className="guide__inline-link" href="#overview">Overview of Scientific Research</a> so
-              the general principles are clear. If you have already started and need advice on a particular step, jump
-              straight to it below. If you are just beginning, follow the steps in order to review the entire research
-              process before you start.
+              {t.guide.recommendationBefore}
+              <a className="guide__inline-link" href="#overview">
+                {t.guide.recommendationLink}
+              </a>
+              {t.guide.recommendationAfter}
             </p>
           )}
           <p className="guide__contact">
-            Questions, comments, or corrections?{' '}
+            {t.guide.contactPrompt}{' '}
             {CONTACT_EMAILS.map((email, i) => (
               <span key={email}>
                 {i > 0 && ' · '}
@@ -61,7 +66,7 @@ export default function GuideEntry() {
         <section className="guide__overview" id="overview">
           <h2 className="guide__h2">
             <span className="guide__h2-rule" />
-            Overview of Scientific Research
+            {t.guide.overviewTitle}
           </h2>
           <ul className="guide__overview-list">
             {overviewTopics.map((topic) => (
@@ -73,14 +78,13 @@ export default function GuideEntry() {
         {/* ---- steps (or coming-soon notice) ---- */}
         {isComingSoon ? (
           <section className="guide__coming-soon">
-            <span className="guide__badge">Coming soon</span>
+            <span className="guide__badge">{t.guide.comingSoonBadge}</span>
             <p className="guide__coming-soon-text">
-              The full step-by-step guide for this methodology is being written. The overview above outlines the
-              intended scope. Want to help shape it?{' '}
+              {t.guide.comingSoonBefore}
               <a className="guide__inline-link" href={`mailto:${CONTACT_EMAILS[0]}`}>
-                Get in touch
+                {t.guide.comingSoonLink}
               </a>
-              .
+              {t.guide.comingSoonAfter}
             </p>
           </section>
         ) : (
@@ -88,7 +92,7 @@ export default function GuideEntry() {
             <section className="guide__steps">
               <h2 className="guide__h2">
                 <span className="guide__h2-rule" />
-                Steps in Conducting Scientific Research
+                {t.guide.stepsTitle}
               </h2>
 
               <ol className="guide__step-grid">
@@ -120,7 +124,7 @@ export default function GuideEntry() {
 
             <nav className="guide__next">
               <Link to={`/guide/${methodology.id}`} className="guide__next-btn">
-                Start with Step 1 · {steps[0].title} →
+                {t.guide.startWithStep(steps[0].title)}
               </Link>
             </nav>
           </>
@@ -132,9 +136,9 @@ export default function GuideEntry() {
       <footer className="guide__footer">
         <div className="guide__footer-mark">
           <LogoMark size={20} />
-          <span>Research Methodology Hub</span>
+          <span>{t.footer.brand}</span>
         </div>
-        <span className="guide__footer-credit">Initialised by Mohamed El Hajji</span>
+        <span className="guide__footer-credit">{t.footer.credit}</span>
         <span className="guide__footer-note">{domain}</span>
       </footer>
     </div>

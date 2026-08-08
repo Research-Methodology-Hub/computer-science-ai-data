@@ -36,6 +36,40 @@
   color: var(--accent, #c8553d);
 }
 
+.site-header__lang {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid rgba(10, 37, 64, 0.18);
+  border-radius: 999px;
+}
+
+.site-header__lang-btn {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink, #0a2540);
+  background: none;
+  border: none;
+  border-radius: 999px;
+  padding: 3px 9px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.site-header__lang-btn:hover {
+  opacity: 1;
+}
+
+.site-header__lang-btn.active {
+  opacity: 1;
+  color: var(--paper, #f4f1ea);
+  background: var(--ink, #0a2540);
+}
+
 @media (max-width: 640px) {
   .site-header__nav {
     gap: 18px;
